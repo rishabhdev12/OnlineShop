@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  {% block title %}
+  <title>Online Shop</title>
+  {% endblock%}  
+  <style>
+    .cont
+    {
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    #con1, #con2, #con3
+    {
+      width: 35px;
+      height: 5px;
+      background-color: rgb(230, 218, 218);
+      margin: 6px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-primary mb-2">
+    <div class="container-fluid">
+      <a class="navbar-brand  text-light" href="/">OnlineShop<span class="material-icons">
+        shopping_bag</span></a>
+      <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="text-light cont mb-1 p-0 navbar-toggler-icon"><div id="con1"></div>
+        <div id="con2"></div>
+        <div id="con3"></div></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-light active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/shop/all/all/all/">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/cart/">Cart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/contactus/">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">About</a>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/logout/">LogOut</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/sellerprofile/">Profile</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="/login/">LogIn</a>
+          </li>
+          {% endif %}
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn text-light btn-outline-dark" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  {% block body %}
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'images/banner1.jpg' %}" width="100%" height="500px" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner4.jpg' %}" width="100%" height="500px" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner3.jpg' %}" width="100%" height="500px" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner2.jpg' %}" width="100%" height="500px" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="container-fluid text-center text-light mt-2 p-2 mb-2 bg-primary">
+    <h1>Products Section</h1>
+  </div>
+  <div class="row">
+    {% for i in Data %}
+    <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
+      <div class="card mb-2 bg-dark text-light" style="height:360px">
+        <img class="h-50 w-100" src={{i.pic1.url}} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{i.name}}</h5>
+          <p class="card-text m-0"><strong>Rs.</strong> <strike>{{i.baseprice}}</strike> {{i.finalprice}}</p>
+          <p class="card-text mb-0.2"><strong>Size</strong> {{i.size}}</p>
+          <a href="/productsection/{{i.id}}/" class="btn w-100 btn-warning text-dark">Add To Cart</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endblock %}
+  <footer class="container-fluid page-footer text-center bg-primary text-light mt-2 p-2 mb-2">
+    <p class="mt-2">Copyrights <a href="/" style="text-decoration: none;color: white;">@OnlineShop.com</a></p>
+    <form class="d-flex w-50" style="margin-left: 25%;" action="/subscribe/" method="post">
+      {% csrf_token %}
+      <input class="form-control me-2" type="email" name="email" placeholder="Enter Email Id to Subscribe Newsletter" aria-label="search">
+      <button class="btn btn-success btn-outline-dark text-light" type="submit">Subscribe</button>
+    </form>
+  </footer>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

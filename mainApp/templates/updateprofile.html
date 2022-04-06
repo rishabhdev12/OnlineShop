@@ -1,0 +1,73 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block title %}
+<title>OnlineShop||UpdateProfile</title>
+{% endblock %}
+{% block body %}
+<div class="container-fluid text-center text-light mb-2 bg-primary p-2"><h1>Update Profile</h1></div>
+<div class="row">
+    <div class="col">
+        {% for i in messages %}
+        <div class="alert alert-success p-3 container" role="alert">
+          {{i}}
+        </div>
+        {% endfor %}
+        <form class="container" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table class="table table-striped">
+                <tr><th>
+                        <label class="form-label">Name</label>
+                    </th>
+                    <td>
+                        <input type="text" class="form-control w-50" placeholder="Enter Name" name="name" value="{{Data.name}}">
+                    </td>
+                </tr>
+                <tr>
+                    <th><label class="form-label">Change Profile Pic</label></th>
+                    <td> <input type="file" class="form-control w-50" name="pic">
+                    </td>
+                </tr>
+                <tr>
+                    <th><label class="form-label">Mobile</label></th>
+                    <td> <input type="text" class="form-control w-50"placeholder="Enter Mobile No" name="mobile" value="{{Data.mobile_no}}">
+                    </td>
+                </tr>
+                <tr><th> <label class="form-label">Email</label></th>
+                    <td><input type="email" class="form-control w-50"placeholder="Enter Email" name="email" value="{{Data.email}}">
+                    </td>
+                </tr>
+                <tr>
+                    <th><label class="form-label">House.No</label></th>
+                    <td><input type="text" class="form-control w-50"placeholder="Enter House.No" name="add1" value="{{Data.address1}}">
+                    </td>
+                </tr>
+                <tr><th><label class="form-label">Block.No/Floor</label></th>
+                    <td><input type="text" class="form-control w-50"placeholder="Enter UserNa" name="add2" value="{{Data.address2}}"></td>
+                </tr>
+                <tr><th><label class="form-label">District</label></th>
+                    <td><input type="text" class="form-control w-50"placeholder="Enter District" name="add3" value="{{Data.address3}}"> </td>
+                </tr>
+                <tr><th><label class="form-label">City</label></th>
+                    <td><input type="text" class="form-control w-50"placeholder="Enter City" name="city" value="{{Data.city}}"></td>
+                </tr>
+                <tr><th><label class="form-label">State</label></th>
+                    <td><input type="text" class="form-control w-50"placeholder="Enter State" name="state" value="{{Data.state}}"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label class="form-label">PIN</label>
+                    </th>
+                    <td>
+                        <input type="text" class="form-control w-50"placeholder="Enter PIN" name="pin" value="{{Data.pin}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td><button class="btn btn-primary w-50">Save</button></td>
+                    <td></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+{% endblock %}

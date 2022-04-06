@@ -1,0 +1,96 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block title %}
+<title>Add Product</title>
+{% endblock %}
+{% block body %}
+<div class="container-fluid text-center text-light mb-2 bg-primary p-2" ><h1>Add Product</h1></div>
+<form class="container" action="" method="post" enctype="multipart/form-data" >
+  {% csrf_token %}
+  <table class="table table-striped">
+    <tr>
+      <th><label class="form-label">Product Name</label></th>
+      <td><input type="text" class="form-control w-50" placeholder="Enter Product Name" name="name"></td>
+    </tr>
+    <tr>
+      <th><label for="inputState" class="form-label">Brand</label></th>
+      <td><select class="form-select w-50" name="brand">
+          <option selected>Select</option>
+          {% for i in Data %}
+          <option value="{{i.name}}">{{i.name}}</option>
+          {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="inputState" class="form-label">MainCategory</label></th>
+      <td>
+        <select class="form-select w-50" name="maincategory">
+          <option selected>Select</option>
+          {% for i in Data1 %}
+          <option value="{{i.name}}">{{i.name}}</option>
+          {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="inputState" class="form-label">SubCategory</label></th>
+      <td><select class="form-select w-50 text-dark" name="subcategory">
+          <option selected>Select</option>
+          {% for i in Data2 %}
+          <option value="{{i.name}}">{{i.name}}</option>
+          {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th><label class="form-label">Base Price</label></th>
+      <td><input type="text" class="form-control w-50" placeholder="Enter Base Price" name="baseprice"></td>
+    </tr>
+    <tr>
+      <th><label class="form-label">Discount</label></th>
+      <td><input type="number" class="form-control w-50" placeholder="Enter Discout" maxlength="100" minlength="0" name="discount"></td>
+    </tr>
+    <tr>
+      <th><label>Color</label></th>
+      <td><input name="color" type="color"></td>
+    </tr>
+    <tr>
+      <th>Size</th>
+      <td><input type="text" name="size" placeholder="Enter Size" >
+      </td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td><textarea name="description"  id="" cols="40" rows="7"></textarea></td>
+    </tr>
+    <tr>
+      <th>Stock</th>
+      <td><select class="form-select w-50" name="stock" id="">
+        <option value="True">In Stock</option>
+        <option value="Flase">Out Of Stock</option>
+      </select></td>
+    </tr>
+    <tr>
+      <th>Picture1</th>
+      <td><input class="form-control w-50" type="file" name="pic1"></td>
+    </tr>
+    <tr>
+      <th>Picture2</th>
+      <td><input class="form-control w-50" type="file" name="pic2"></td>
+    </tr>
+    <tr>
+      <th>Picture3</th>
+      <td><input class="form-control w-50" type="file" name="pic3"></td>
+    </tr>
+    <tr>
+      <th>Picture4</th>
+      <td><input class="form-control w-50" type="file" name="pic4"></td>
+    </tr>
+    <tr>
+      <th class="text-center"><button class="form-control bg-primary text-light w-50"  type="submit" >Save</button></th>
+      <td></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

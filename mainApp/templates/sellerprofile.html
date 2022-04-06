@@ -1,0 +1,112 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block title %}
+<title>OnlineShop||Seller's Profile</title>
+{% endblock %}
+{% block body %}
+<div class="container-fluid text-center text-light mb-3 bg-primary p-3" ><h1>Seller's Profile</h1></div>
+    <div class="col container">
+        {% if Data.pic %}
+        <img class="w-55 h-55" src="{{Data.pic.url}}" width="250px" height="250px" alt="">
+        {% else %}
+        <img src="{% static 'images/noprofile.png' %}" alt="">
+        {% endif %}
+    </div>
+    <div class="col container">
+            <table class="table table-striped table-hover">
+                <tr><th>
+                        <label class="form-label">Name</label>
+                    </th>
+                    <td>
+                        <label type="text" placeholder="Enter Name" name="name">{{Data.name}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label class="form-label">Mobile</label></th>
+                    <td> <label type="text" placeholder="Enter Mobile No" name="mobile">{{Data.mobile_no}}</label>
+                    </td>
+                </tr>
+                <tr><th> <label class="form-label">Email</label></th>
+                    <td><label type="text" placeholder="Enter Email" name="email">{{Data.email}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label class="form-label">House.No</label></th>
+                    <td><label type="text" placeholder="Enter House.No" name="add1">{{Data.address1}}</label>
+                    </td>
+                </tr>
+                <tr><th><label class="form-label">Block.No/Floor</label></th>
+                    <td><label type="text" placeholder="Enter UserNa" name="add5">{{Data.address2}}</label></td>
+                </tr>
+                <tr><th><label class="form-label">District</label></th>
+                    <td><label type="text" placeholder="Enter City" name="add5">{{Data.address3}}</label> </td>
+                </tr>
+                <tr><th><label class="form-label">City</label></th>
+                    <td><label type="text" placeholder="Enter City" name="city">{{Data.city}}</label></td>
+                </tr>
+                <tr><th><label class="form-label">State</label></th>
+                    <td><label type="text" placeholder="Enter State" name="state">{{Data.state}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label class="form-label">PIN</label>
+                    </th>
+                    <td>
+                        <label type="text" placeholder="Enter PIN" name>{{Data.pin}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <th><a class="btn btn-primary" href="/updateprofile/">Update Profile</a></th>
+                    <td></td>
+                </tr>
+            </table>
+            </div>
+    <div class="container-fluid text-center text-light mb-3 bg-primary p-3"><h1>My Product Section <span class="material-icons"><a class="text-light" href="/addproduct/" title="Add Product"> add_box</a>
+        </span>
+        </h1></div>
+    <div class="container-fluid">
+        <table class="table table-striped" >
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Sub Category</th>
+                <th>Size</th>
+                <th>Stock</th>
+                <th>Color</th>
+                <th>Base Price</th>
+                <th>Discount</th>
+                <th>Final Price</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for i in Product1 %}
+            <tr>
+                <td >{% if i.pic1 %}
+                    <img src="{{i.pic1.url}}" width="150px" height="150px" alt="">
+                    {% else %}
+                    <img src="{% static 'images/noprofile.png' %}" width="150px" height="150px" alt="">
+                    {% endif %}
+                </td>
+                <td>{{i.name}}</td>
+                <td>{{i.brand.name}}</td>
+                <td>{{i.subcat.name}}</td>
+                <td>{{i.size}}</td>
+                {% if i.stock %}
+                <td>In Stock</td>
+                {% else %}
+                <td>Out Of Stock</td>
+                {% endif %}
+                <td><input type="color" value="{{i.color}}" id=""></td>
+                <td>Rs.{{i.baseprice}}</td>
+                <td>{{i.discount}}%</td>
+                <td>Rs.{{i.finalprice}}</td>
+                <td><span class="material-icons"><a class="text-primary text-decoration-none" href="/editproduct/{{i.id}}" title="Edit" >edit</a>
+                </span></td>
+                <td><span class="material-icons"><a class="text-primary text-decoration-none" href="/deleteproduct/{{i.id}}" title="Delete">delete</a></span></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

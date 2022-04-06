@@ -1,0 +1,46 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block title %}
+<title>OnlineShop||LogIn</title>
+{% endblock %}
+{% block body %}
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img src="{% static 'images/login.jpg' %}" class="img-fluid" alt="Phone image">
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        <div class="row container-fluid text-center text-light mb-4 bg-primary p-2">
+          <h1>Login Form</h1>
+        </div>
+        {% for i in messages %}
+        <div class="alert alert-danger" role="alert">
+          {{i}}
+        </div>
+        {% endfor %}
+        <form action="" method="post">
+
+        {% csrf_token %}
+          <div class="form-outline mb-4">
+            <input type="text" id="form1Example13" placeholder="Enter UserName" class="form-control form-control-lg"
+              name="username" />
+            <label class="form-label" for="form1Example13">UserName</label>
+          </div>
+
+
+          <div class="form-outline mb-4">
+            <input type="password" id="form1Example23" class="form-control form-control-lg" placeholder="Enter Password"
+              name="password" />
+            <label class="form-label" for="form1Example23">Password</label><br>
+            <a href="/forgetpassword/">Forget Password</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block">LogIn</button><br>
+          <a href="/signup/">New User? Sign Up</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

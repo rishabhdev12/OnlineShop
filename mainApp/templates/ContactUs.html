@@ -1,0 +1,51 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block title %}
+<title>OnlineShop||SignUp</title>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class=" mb-2 p-3 text-light text-center bg-primary" >
+        <h1>Contact Us</h1>
+    </div>
+</div>
+<div class="row mt-3 mb-3" ><h2 class="text-center">Getting in touch is easy!</h2></div>
+        <div class="row   ">
+            <div class="col">
+                <div class="row container-fluid text-center text-light bg-primary" style="width: 92%;"><h3><a class="text-light" style="text-decoration: none;" href="/">OnlineShop.com</a></h3>
+                    <h3>Mobile No.:9878960550</h3>
+                <h3>Email ID:OnlineShop123@gmail.com</h3></div>
+            <div class="col-md-12 col-lg-6 col-xl-6 col-sm-12 col-xs-12 " ><div class="mapouter"><div class="gmap_canvas"><iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=block 24,trilok puri,delhi&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://kokagames.com/">FNF Mods</a></div><style>.mapouter{position:relative;text-align:right;width:600px;height:400px;}.gmap_canvas {overflow:hidden;background:none!important;width:600px;height:400px;}.gmap_iframe {width:600px!important;height:400px!important;}</style></div></div>             <div class="col-md-3 col-lg-3 col-xl-3 offset-xl-1"></div>
+        </div>
+        <div class="col">
+            <div class="col-md-12 col-lg-6 col-xl-6 col-sm-12 col-xs-12 "> 
+                {% for i in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{i}}
+                </div>
+                {% endfor %} 
+            <form action="" method="post">
+                    {% csrf_token %}
+                    <label class="form-label" for="form1Example13">Name</label>
+                    <input type="text" placeholder="Enter Name" class="form-control w-100" name="name" /><br>
+
+                    <label class="form-label" for="form1Example13">Email</label>
+                    <input type="email" id="form1Example13" placeholder="Enter Email" class="form-control w-100"
+                        name="email" /></br>
+                     
+                    <label class="form-label" for="form1Example13">Mobile No.</label>
+                    <input type="text" id="form1Example13" placeholder="Enter Phpne No." class="form-control w-100"
+                        name="mobile" /></br>    
+
+                    <label class="form-label" for="form1Example13">Subject</label>
+                    <input class="form-control w-100" type="text" name="subject" placeholder="Enter Subject"><br>
+
+                    <label class="form-label" for="form1Example13">Message</label>
+                    <textarea  name="message" class="form-control " id="" cols="30" rows="6"></textarea>
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-lg mt-2 btn-block">Submit</button><br>
+                </form>
+            </div>
+        </div>
+        </div>
+{% endblock %}

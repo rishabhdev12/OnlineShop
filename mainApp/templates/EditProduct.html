@@ -1,0 +1,121 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block title %}
+<title>OnlineShop||Edit Product</title>
+{% endblock %}
+{% block body %}
+<div class="container-fluid text-center text-light mb-2 bg-primary p-2" ><h1>Edit Product</h1></div>
+<form class="container" action="" method="post" enctype="multipart/form-data" >
+  {% csrf_token %}
+  <table class="table table-striped">
+    <tr>
+      <th><label class="form-label">Product Name</label></th>
+      <td><input type="text" class="form-control w-50" placeholder="Enter Product Name" name="name" value="{{Product.name}}"></td>
+    </tr>
+    <tr>
+      <th><label for="inputState" class="form-label">Brand</label></th>
+      <td><select class="form-select w-50" name="brand">
+          <option selected>{{Product.brand.name}}</option>
+          {% for i in brand %}
+          <option value="{{i.name}}">{{i.name}}</option>
+          {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="inputState" class="form-label">MainCategory</label></th>
+      <td>
+        <select class="form-select w-50" name="maincategory">
+          <option selected>{{Product.maincat.name}}</option>
+          {% for i in maincat %}
+          <option value="{{i.name}}">{{i.name}}</option>
+          {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="inputState" class="form-label">SubCategory</label></th>
+      <td><select class="form-select w-50 text-dark" name="subcategory">
+          <option selected>{{Product.subcat.name}}</option>
+          {% for i in subcat %}
+          <option value="{{i.name}}">{{i.name}}</option>
+          {% endfor %}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th><label class="form-label">Base Price</label></th>
+      <td><input type="text" class="form-control w-50" placeholder="Enter Base Price" name="baseprice" value="{{Product.baseprice}}"></td>
+    </tr>
+    <tr>
+      <th><label class="form-label">Discount</label></th>
+      <td><input type="number" class="form-control w-50" placeholder="Enter Discout" maxlength="100" minlength="0" name="discount" value="{{Product.discount}}"></td>
+    </tr>
+    <tr>
+      <th><label>Color</label></th>
+      <td><input name="color" type="color" value="{{Product.color}}" ></td>
+    </tr>
+    <tr>
+      <th>Size</th>
+      <td><input type="text" name="size" placeholder="Enter Size" value="{{Product.size}}" >
+      </td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td><textarea name="description"  id="" cols="40" rows="7">{{Product.description}}</textarea></td>
+    </tr>
+    <tr>
+      <th>Stock</th>
+      <td><select class="form-select w-50" name="stock" id="">
+        {% if Product.stock %}
+            <option selected value="True">In Stock</option>
+        {% else %}
+            <option selected value="False">Out Of Stock</option>
+        {% endif %}
+        <option value="True">In Stock</option>
+        <option value="Flase">Out Of Stock</option>
+      </select></td>
+    </tr>
+    <tr>
+      <th>Picture1</th>
+      <td>{% if Product.pic1 %}
+          <img src="{{Product.pic1.url}}" width="150px" height="150px" alt="">
+          {% else %}
+          <img src="" alt="">
+          {% endif %}
+        <input class="form-control w-50" type="file" name="pic1" ></td>
+    </tr>
+    <tr>
+      <th>Picture2</th>
+      <td>{% if Product.pic2 %}
+        <img src="{{Product.pic2.url}}" width="150px" height="150px" alt="">
+        {% else %}
+        <img src="" alt="">
+        {% endif %}
+        <input class="form-control w-50" type="file" name="pic2" ></td>
+    </tr>
+    <tr>
+      <th>Picture3</th>
+      <td>{% if Product.pic3 %}
+        <img src="{{Product.pic3.url}}" width="150px" height="150px" alt="">
+        {% else %}
+        <img src="" alt="">
+        {% endif %}
+        <input class="form-control w-50" type="file" name="pic3" ></td>
+    </tr>
+    <tr>
+      <th>Picture4</th>
+      <td>{% if Product.pic4 %}
+        <img src="{{Product.pic4.url}}" width="150px" height="150px" alt="">
+        {% else %}
+        <img src="" alt="">
+        {% endif %}
+        <input class="form-control w-50" type="file" name="pic4" ></td>
+    </tr>
+    <tr>
+      <th class="text-center"><button class="form-control bg-primary text-light w-50"  type="submit" >Save</button></th>
+      <td></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

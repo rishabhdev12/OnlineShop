@@ -1,0 +1,100 @@
+{% extends 'home.html' %}
+{% load cart %}
+{% load static %}
+{% block title %}
+<title>OnlineShop||Cart</title>
+{% endblock %}
+{% block body %}
+<div class="container-fluid text-center text-light mb-3 bg-primary p-3">
+    <h1>Cart Section</h1>
+</div>
+{% if Product %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col mb-5">
+            <table class="table table-striped">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Sub Category</th>
+                    <th>Size</th>
+                    <th>Color</th>
+                    <th>Base Price</th>
+                    <th>Discount</th>
+                    <th>Final Price</th>
+                    <th>Quantity</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                {% for i in Product %}
+                <tr>
+                    <td>{% if i.pic1 %}
+                        <img src="{{i.pic1.url}}" width="150px" height="150px" alt="">
+                        {% else %}
+                        <img src="{% static 'images/noprofile.png' %}" width="150px" height="150px" alt="">
+                        {% endif %}
+                    </td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.brand.name}}</td>
+                    <td>{{i.subcat.name}}</td>
+                    <td>{{i.size}}</td>
+                    <td><input type="color" value="{{i.color}}" id=""></td>
+                    <td>Rs.{{i.baseprice}}</td>
+                    <td>{{i.discount}}%</td>
+                    <td>Rs.{{i.finalprice}}</td>
+                    <td><form action="" method="post">
+                        {% csrf_token %}
+                        <input hidden type="text" name="id" value="{{i.id}}">
+                        <input class="w-50" type="text" name="quantity" value="{{request|cartQuantity:i.id}}">
+                        <button class="btn text-primary p-0 m-0" style="border-radius: 80%;" ><span class="material-icons" style="font-size: 25px;">
+                            add_circle</span></button>
+                    </form>
+                     </td>
+                    <td><span class="material-icons"><a class="text-primary text-decoration-none"
+                                href="/deletecart/{{i.id}}" title="Delete">delete</a></span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-striped">
+                <tr>
+                    <th class="text-center" colspan="2">
+                        <h3>Price Details</h3>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-secondary">Total Price</th>
+                    <td>Rs.{{Data.sum}}</td>
+                </tr>
+                <tr>
+                    <th class="text-secondary">Total Discount</th>
+                    <td style="color: green;">-Rs.{{Data.dis}}</td>
+                </tr>
+                <tr class="mt-2">
+                    <th>
+                        <h4>Total Amount</h4>
+                    </th>
+                    <td><h4>Rs.{{Data.total}}</h4></td>
+                </tr>
+                <tr>
+                    <td >
+                    <a class="btn btn-primary text-light w-100" href="/checkout/">CheckOut</a></td>
+                    <td><a class="btn btn-primary text-light w-100" href="/shop/all/all/all/">Continue Shopping</a></td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="text-center">
+    <span class="material-icons" style="font-size: 90px;color: red;">
+        new_releases</span>
+<h1>Your Cart is Empty</h1>
+<a class="btn btn-primary mt-3 mb-5 text-light" href="/shop/all/all/all/" style="font-size: 30px;width: 200px;">Shop</a>
+</div>
+{% endif %}
+{% endblock %}
